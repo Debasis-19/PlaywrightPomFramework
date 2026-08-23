@@ -9,6 +9,7 @@ import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const isCI = !!process.env.CI;
+const ciHeadless = isCI ? true : undefined;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -36,7 +37,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     // GitHub Actions Linux runners do not provide an X server, so CI must stay headless.
-    headless: isCI ? true : undefined,
+    headless: ciHeadless,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
@@ -46,7 +47,7 @@ export default defineConfig({
     {
       name: 'setup',
       use: {
-       headless: isCI ? true : undefined,
+        headless: ciHeadless,
       },
       testMatch: ['tests/global.setup.ts']
     },
@@ -54,7 +55,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'],
         storageState: 'auth.user.json',
-        headless: isCI ? true : undefined,
+        headless: ciHeadless,
        },
        dependencies: ['setup'],
     },
