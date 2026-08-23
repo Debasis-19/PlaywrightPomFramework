@@ -9,7 +9,7 @@
     "allure:open": "allure open allure-report",
     "allure:report": "npm run allure:generate && npm run allure:open",
     "test:allure": "playwright test && npm run allure:generate",
-    "test:allure:ci": "playwright test && npm run allure:generate"
+    "test:allure:ci": "npm test && npm run allure:generate"
   },
   "keywords": [],
   "author": "",

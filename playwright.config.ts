@@ -8,6 +8,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+const isCI = !!process.env.CI;
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -16,11 +18,11 @@ export default defineConfig({
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  forbidOnly: isCI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,
+  retries: isCI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html'],
@@ -33,7 +35,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: true,
+    // GitHub Actions Linux runners do not provide an X server, so CI must stay headless.
+    headless: isCI ? true : undefined,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
@@ -42,12 +45,16 @@ export default defineConfig({
   projects: [
     {
       name: 'setup',
+      use: {
+       headless: isCI ? true : undefined,
+      },
       testMatch: ['tests/global.setup.ts']
     },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'],
         storageState: 'auth.user.json',
+        headless: isCI ? true : undefined,
        },
        dependencies: ['setup'],
     },
