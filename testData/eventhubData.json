@@ -1,0 +1,10 @@
+{
+    "category": "Sports",
+    "city": "New York",
+    "venue": "Madison Square Garden",          
+    "price": "150",
+    "totalSeats": "1000",
+    "fullName": "John Doe",
+    "phoneNumber": "123-456-7890",
+    "eventName": "NFL League"
+}
