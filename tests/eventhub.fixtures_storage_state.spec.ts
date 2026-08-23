@@ -10,6 +10,8 @@ test('E2E Event Creation Test with POM', async ({page,loginPage,homePage,adminEv
     //Step 2 - Create a new event
     await page.getByRole('navigation').getByText('Admin').click()
     await page.getByRole('navigation').getByRole('link',{name:'Manage Events'}).click()
+    await expect(page).toHaveURL(process.env.baseurl + '/admin/events')
+    await page.screenshot({ path: 'screenshots/ManageEvents.png', fullPage: true })
     await adminEventsPage.createEvent(eventhubData.eventName, eventhubData.category, eventhubData.city, eventhubData.venue, '2026-09-25T14:30', eventhubData.price, eventhubData.totalSeats)
     await expect(adminEventsPage.eventCreatedToast).toBeVisible()
     const eventCreatedToastMsg = await adminEventsPage.getEventToastMessage()

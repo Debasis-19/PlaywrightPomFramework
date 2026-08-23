@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "allure:generate": "allure generate allure-results --clean",
+    "allure:open": "allure open allure-report",
+    "allure:report": "npm run allure:generate && npm run allure:open",
+    "test:allure": "playwright test && npm run allure:generate",
+    "test:allure:ci": "playwright test && npm run allure:generate"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -11,6 +18,8 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.10.2",
     "dotenv": "^17.4.2"
   }
 }
