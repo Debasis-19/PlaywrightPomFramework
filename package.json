@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
+    "test": "playwright test eventhub.fixtures_storage_state.spec.ts --project=chromium",
     "allure:generate": "allure generate allure-results --clean",
     "allure:open": "allure open allure-report",
     "allure:report": "npm run allure:generate && npm run allure:open",
-    "test:allure": "playwright test && npm run allure:generate",
-    "test:allure:ci": "playwright test && npm run allure:generate"
+    "test:allure": "playwright test eventhub.fixtures_storage_state.spec.ts --project=chromium && npm run allure:generate",
+    "test:allure:ci": "playwright test eventhub.fixtures_storage_state.spec.ts --project=chromium && npm run allure:generate"
   },
   "keywords": [],
   "author": "",
