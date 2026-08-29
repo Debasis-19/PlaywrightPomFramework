@@ -1,12 +1,12 @@
 import {Page,Locator} from '@playwright/test'
+import {BasePage} from './BasePage' 
 
-export class EventsPage{
-    page:Page;
-    eventCards:Locator;
-    bookEventButton:Locator;
+export class EventsPage extends BasePage{
+    readonly eventCards:Locator;
+    readonly bookEventButton:Locator;
 
     constructor(page:Page){
-        this.page = page;
+        super(page)
         this.eventCards = page.getByRole('article')
         this.bookEventButton = page.getByText('Book Event')
     }

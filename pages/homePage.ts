@@ -1,11 +1,11 @@
 import {Page,Locator} from '@playwright/test'
+import {BasePage} from './BasePage'
 
-export class HomePage{
-    page : Page;
-    browseEventsLink : Locator;
+export class HomePage extends BasePage{
+   readonly browseEventsLink : Locator;
 
     constructor(page: Page){
-        this.page = page;
+        super(page)
         this.browseEventsLink = page.getByText('Browse Events →')
     }
 

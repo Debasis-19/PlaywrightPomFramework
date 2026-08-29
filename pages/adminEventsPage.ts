@@ -1,21 +1,21 @@
 import {Page,Locator} from '@playwright/test'
+import {BasePage} from './BasePage'
 
-export class AdminEventsPage{
-    page:Page;
-    titleInput:Locator;
-    categoryDropdown:Locator;
-    cityInput:Locator;
-    venueInput:Locator;
-    eventDateTimeInput:Locator;
-    priceInput:Locator
-    totalSeatsInput:Locator;
-    addEventButton:Locator;
-    eventCreatedToast:Locator;
-    deleteEventButton:Locator;
-    deletedEventToast:Locator;
+export class AdminEventsPage extends BasePage{
+    readonly titleInput:Locator;
+    readonly categoryDropdown:Locator;
+    readonly cityInput:Locator;
+    readonly venueInput:Locator;
+    readonly eventDateTimeInput:Locator;
+    readonly priceInput:Locator;
+    readonly totalSeatsInput:Locator;
+    readonly addEventButton:Locator;
+    readonly eventCreatedToast:Locator;
+    readonly deleteEventButton:Locator;
+    readonly deletedEventToast:Locator;
 
     constructor(page:Page){
-        this.page = page;
+        super(page)
         this.titleInput = page.getByLabel('Title')
         this.categoryDropdown = page.getByRole('combobox',{name:'Category'})
         this.cityInput = page.getByLabel('City')

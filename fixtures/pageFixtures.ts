@@ -1,10 +1,11 @@
 import {test as base,expect} from '@playwright/test'
 import {LoginPage} from '../pages/loginPage'
-import {HomePage} from '../pages/homePage'
-import {AdminEventsPage} from '../pages/adminEventsPage'
+import {HomePage} from '../pages/HomePage'
+import {AdminEventsPage} from '../pages/AdminEventsPage'
 import {EventsPage} from '../pages/EventsPage'
-import {BookingPage} from '../pages/bookingPage'
+import {BookingPage} from '../pages/BookingPage'
 import {MyBookingsPage} from '../pages/myBookingsPage'
+import {HeaderNavComponent} from '../components/headerNavComponent'
 
 type myFixture = {
     loginPage : LoginPage,
@@ -12,7 +13,8 @@ type myFixture = {
     adminEventsPage : AdminEventsPage,
     eventsPage : EventsPage,
     bookingPage : BookingPage,
-    myBookingsPage : MyBookingsPage
+    myBookingsPage : MyBookingsPage,
+    headerNavComponent : HeaderNavComponent
 }
 
 export const test = base.extend<myFixture>({
@@ -33,6 +35,19 @@ export const test = base.extend<myFixture>({
     },
     myBookingsPage : async({page},use) => {
         await use(new MyBookingsPage(page))
+    },
+    headerNavComponent : async({page},use) => {
+        await use(new HeaderNavComponent(page))
+    }
+})
+
+test.afterEach(async ({page}, testInfo) => {
+    if (testInfo.status !== testInfo.expectedStatus) {
+        const screenshot = await page.screenshot({fullPage: true})
+        await testInfo.attach('Failure Screenshot', {
+            body: screenshot,
+            contentType: 'image/png'
+        })
     }
 })
 

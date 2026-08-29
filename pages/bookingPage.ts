@@ -1,17 +1,17 @@
-import {Page,Locator} from '@playwright/test'
+import {Locator,Page} from '@playwright/test'
+import {BasePage} from './BasePage'
 
-export class BookingPage{
-    page:Page;
-    fullNameInput:Locator;
-    emailInput:Locator;
-    phoneNumberInput:Locator;
-    confirmBookingButton:Locator;
-    bookingConfirmedText:Locator
-    bookingRefernce:Locator
-    viewMyBookingsButton:Locator
+export class BookingPage extends BasePage{
+    readonly fullNameInput:Locator;
+    readonly emailInput:Locator;
+    readonly phoneNumberInput:Locator;
+    readonly confirmBookingButton:Locator;
+    readonly bookingConfirmedText:Locator
+    readonly bookingRefernce:Locator
+    readonly viewMyBookingsButton:Locator
 
     constructor(page:Page){
-        this.page = page;
+        super(page)
         this.fullNameInput = page.getByRole('textbox',{name:'Full Name'})
         this.emailInput = page.getByRole('textbox',{name:'Email'})
         this.phoneNumberInput = page.getByRole('textbox',{name:'Phone Number'})
