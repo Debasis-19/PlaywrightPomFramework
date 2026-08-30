@@ -8,6 +8,11 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      ENV: .env
+      baseurl: ${{secrets.URL}}
+      email: ${{secrets.EMAIL}}
+      password: ${{secrets.PASSWORD}}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
