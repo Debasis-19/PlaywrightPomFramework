@@ -3,7 +3,7 @@ import eventhubData from '../testData/eventhubData.json'
 import {LoginPage} from '../pages/loginPage'
 import {HomePage} from '../pages/homePage'
 import {AdminEventsPage} from '../pages/adminEventsPage'
-import {EventsPage} from '../pages/eventsPage'
+import {EventsPage} from '../pages/EventsPage'
 import {BookingPage} from '../pages/bookingPage'
 import {MyBookingsPage} from '../pages/myBookingsPage'
 
